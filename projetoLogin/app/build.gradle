@@ -1,0 +1,47 @@
+plugins {
+    id 'application' // Plugin para aplicações Java
+    id 'java' // Plugin para suporte a Java
+}
+
+repositories {
+    mavenCentral() // Repositório Maven Central para baixar dependências
+}
+
+dependencies {
+    // Dependência do SQLite JDBC (usando Maven Central)
+    implementation 'org.xerial:sqlite-jdbc:3.43.0' // Versão mais recente do SQLite JDBC
+
+    // Dependência do Swing (já incluída no JDK, mas pode ser útil para projetos futuros)
+    implementation 'org.openjfx:javafx-swing:20' // JavaFX Swing (opcional)
+
+    // Dependência do JUnit para testes
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Dependência do Guava (opcional, apenas se você estiver usando)
+    implementation 'com.google.guava:guava:31.1-jre'
+}
+
+// Configurações do Java
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17) // Versão do Java (ajuste conforme necessário)
+    }
+}
+
+application {
+    // Define a classe principal do projeto
+    mainClass = 'projetoLogin.TelaLogin' // Altere para a classe principal do seu projeto
+}
+
+// Tarefa para criar um JAR executável
+tasks.named('jar') {
+    manifest {
+        attributes 'Main-Class': 'projetoLogin.TelaLogin' // Classe principal para o JAR
+    }
+}
+
+tasks.named('test') {
+    // Use JUnit Platform para testes
+    useJUnitPlatform()
+}
